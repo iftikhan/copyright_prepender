@@ -1,0 +1,14 @@
+################################################################################
+# Copyright (c) 2019-2020 by XYZ Systems, Inc.
+#
+# Restricted Rights Legend
+#
+# Use, duplication, or disclosure is subject to restrictions as set forth in
+# subparagraph (c) of the Commercial Computer Software - Restricted Rights
+# clause at FAR sec. of the Rights in Technical Data and Computer Software clause.
+#
+# XYZ Systems, Inc.
+# 1700 West Tasman Drive
+# San Jose, California 95134-1706
+#
+################################################################################
