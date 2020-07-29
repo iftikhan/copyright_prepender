@@ -1,19 +1,3 @@
-################################################################################
-# Copyright (c) 2019-2020 by My Systems, Inc.
-#
-# Restricted Rights Legend
-#
-# Use, duplication, or disclosure is subject to restrictions as set forth in
-# subparagraph (c) of the Commercial Computer Software - Restricted Rights
-# clause at FAR sec. 52.227-19 and subparagraph (c) (1) (ii) of the Rights in
-# Technical Data and Computer Software clause at DFARS sec. 252.227-7013.
-#
-# My Systems, Inc.
-# 170 West Tasman Drive
-# San Jose, California 95134-1706
-#
-################################################################################
-
 import os
 import sys
 from typing import List
@@ -57,25 +41,18 @@ def main():
         print('Not a valid directory!!!')
         print('usage: python copyright.py <dir> --file-extension <.tf>')
         sys.exit(1)
+    
+    # TODO: Plase update the regex as per new copytight content
+    pattern = re.compile("^/?#+\n+#+ Copyright \(c\) [0-9]{4}-[0-9]{4} by Cisco Systems, Inc\.")
+    try:
 
-    pattern = re.compile("^/?#+\n+#+ Copyright \(c\) [0-9]{4}-[0-9]{4} by My Systems, Inc\.")
-
-    copyright_text = "################################################################################\n" \
-                     "# Copyright (c) 2019-2020 by My Systems, Inc.\n" \
-                     "#\n" \
-                     "# Restricted Rights Legend\n" \
-                     "#\n" \
-                     "# Use, duplication, or disclosure is subject to restrictions as set forth in\n" \
-                     "# subparagraph (c) of the Commercial Computer Software - Restricted Rights\n" \
-                     "# clause at FAR sec. 52.227-19 and subparagraph (c) (1) (ii) of the Rights in\n" \
-                     "# Technical Data and Computer Software clause at DFARS sec. 252.227-7013.\n" \
-                     "#\n" \
-                     "# My Systems, Inc.\n" \
-                     "# 170 West Tasman Drive\n" \
-                     "# San Jose, California 95134-1706\n" \
-                     "#\n" \
-                     "################################################################################\n"
-    add_copyright(directory, ext, pattern, copyright_text)
+        fp = open('copyright.txt', 'r')
+        copyright_text = ''.join(fp.readlines())
+        fp.close()
+        add_copyright(directory, ext, pattern, copyright_text)
+    except Exception as ex:
+        print("Please add 'copyright.txt' file with Copyright content in it.")
+        sys.exit(1)
 
 
 def add_copyright(directory, ext, pattern, copyright_text):
@@ -89,7 +66,7 @@ def add_copyright(directory, ext, pattern, copyright_text):
             lines = fp.readlines()
             fp.close()
             if not pattern.match(''.join(lines)):
-                lines.insert(0, copyright_text + '\n')
+                lines.insert(0, ''.join(copyright_text) + '\n')
                 fp = open(directory + '/' + f, 'r+')
                 fp.writelines(lines)
                 fp.close()
